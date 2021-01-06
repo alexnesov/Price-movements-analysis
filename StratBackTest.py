@@ -1,6 +1,7 @@
 import pandas as pd
-
+import numpy as np
 prices_stock_a = [10,10.2,9.8,12,10,8,7]
+
 
 
 
@@ -14,6 +15,8 @@ class StratBackTest:
         self.stock_ret = 0
         self.valid_evols = []
         self.stop_loss = stop_loss
+        self.index_stop = 0
+        self.ListOfLists = []
 
     def getEvols(self):
         """
@@ -28,23 +31,35 @@ class StratBackTest:
             if init==False:
                 evol = (price-p_dMinus1)/p_dMinus1
                 self.evol_stock_a.append(round(evol,2))
-            else:
-                evol = 0
-                self.evol_stock_a.append(evol)
 
             count +=1
             init = False
 
     def retToStop(self):
         """
+        Get index to know which price to take to calculate final return
         """
         count = 0
+        init = True
 
         for evol in self.evol_stock_a:
+            print(evol, ",", count)
             if evol >self.stop_loss:
                 self.valid_evols.append(evol)
             else:
                 break
+            count +=1
+
+        
+        self.index_stop = count + 1
+    
+    @property
+    def getLastPrice(self):
+
+        lastPrice = self.stock_prices[self.index_stop]
+        
+        return lastPrice
+        
 
 
 
@@ -53,6 +68,7 @@ strat.getEvols()
 strat.evol_stock_a
 strat.retToStop()
 strat.valid_evols
+strat.getLastPrice
 
 
 
