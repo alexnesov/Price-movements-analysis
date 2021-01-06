@@ -13,6 +13,7 @@ class StratBackTest:
         self.stock_prices = prices
         self.stock_ret = 0
         self.valid_evols = []
+        self.stop_loss = stop_loss
 
     def getEvols(self):
         """
@@ -40,17 +41,14 @@ class StratBackTest:
         count = 0
 
         for evol in self.evol_stock_a:
-            count+=1
-            print(count)
-            print(evol)
-            if evol >-0.2:
-                self.valid_evols.append(self.evol_stock_a[count])
+            if evol >self.stop_loss:
+                self.valid_evols.append(evol)
             else:
                 break
 
 
 
-strat = StratBackTest(prices=prices_stock_a,stop_loss=0.2)
+strat = StratBackTest(prices=prices_stock_a,stop_loss=-0.2)
 strat.getEvols()
 strat.evol_stock_a
 strat.retToStop()
