@@ -5,7 +5,7 @@ stockA = [1,2,4,15,1,6]
 
 
 """
-Scenario:
+Scenario to come:
 
 100 000 euros
 split on 10 stock
@@ -26,12 +26,15 @@ class Portfolio:
         self.totalPositions = self.totalPositions + Iamount
         self.positions.update(
             {f'{positionID}':
-            {'ticker':f'{Iticker}',
-            'amount':f'{Iamount}',
-            'initialPrice':f'{IinitialPrice}'}            
-            }
+
+                {'ticker':f'{Iticker}',
+                'amount':f'{Iamount}',
+                'initialPrice':f'{IinitialPrice}'}
+                }
+
             )
-    
+    def addPrice(self)
+
 
 
 
@@ -41,4 +44,4 @@ class Portfolio:
 
 P1 = Portfolio("P1")
 P1.addPosition("Pos001",'AAPL',1000,80)
-P1.positions
+P1.positions['Pos001']['ticker']
