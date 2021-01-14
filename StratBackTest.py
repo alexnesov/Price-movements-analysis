@@ -1,9 +1,6 @@
 import pandas as pd
 import numpy as np
 
-stockA = [1,2,4,15,1,6]
-
-
 
 class Portfolio:
     """
