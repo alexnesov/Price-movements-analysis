@@ -13,7 +13,7 @@ split on 10 stock
 
 class Portfolio:
     """
-
+    
     """
     positions = {}
     totalPL = 0
@@ -33,7 +33,19 @@ class Portfolio:
                 }
 
             )
-    def addPrice(self)
+
+    def addPrice(self,positionID,priceNow):
+        """
+        We add the current price market to the position
+        """
+        self.positions[f'{positionID}']['priceNow'] = f'{priceNow}'
+
+    @property
+    def portfolioAsDF(self):
+        df = pd.DataFrame.from_dict(self.positions)
+        return df
+
+
 
 
 
@@ -44,4 +56,11 @@ class Portfolio:
 
 P1 = Portfolio("P1")
 P1.addPosition("Pos001",'AAPL',1000,80)
+P1.addPosition("Pos002",'PLUG',1000,63)
+
+
+P1.addPrice("Pos001",60)
+
 P1.positions['Pos001']['ticker']
+P1.positions
+P1.portfolioAsDF
