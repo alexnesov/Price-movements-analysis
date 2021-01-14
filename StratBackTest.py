@@ -4,7 +4,7 @@ import numpy as np
 
 class Portfolio:
     """
-
+    The Porfolio aims to be made of approx. 10 stocks
     """
     positions = {}
     totalPL = 0
