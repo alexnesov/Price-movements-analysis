@@ -41,7 +41,7 @@ class Portfolio:
 
     def calculateTotalPL(self):
         df = pd.DataFrame.from_dict(self.positions)
-        rowPL = df.loc['PL']
+        rowPL = df.loc['PositionPL']
         rowPLfloats = pd.to_numeric(rowPL, errors='coerce')
         self.totalPL = sum(rowPLfloats)
         print('Total PL: ', self.totalPL)
@@ -60,7 +60,7 @@ class Portfolio:
                 self.positions[f'{positionID}']['initialPrice'],
                 self.positions[f'{positionID}']['priceNow'])
 
-        self.positions[f'{positionID}']['PL'] = f'{pl}'
+        self.positions[f'{positionID}']['PositionPL'] = f'{pl}'
         
         self.calculateTotalPL()
 
@@ -71,8 +71,8 @@ P1.positions['Pos001']
 
 
 P1 = Portfolio("P1")
-P1.addPosition("Pos001",'AAPL',1000,80)
-P1.addPosition("Pos002",'PLUG',1000,63)
+P1.addPosition("Pos001",'stonksXYZ',1000,80)
+P1.addPosition("Pos002",'stonksABX',1000,63)
 
 P1.addPrice("Pos001",60)
 P1.addPrice("Pos002",100)
