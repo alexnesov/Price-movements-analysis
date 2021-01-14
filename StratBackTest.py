@@ -59,6 +59,11 @@ class Portfolio:
 
     @property
     def portfolioAsDF(self):
+        """
+        Transforms dictionnary into a dataframe
+        Propoerty decorator allows us to visualize the portfolio 
+        in a nice DF format
+        """
         df = pd.DataFrame.from_dict(self.positions)
         return df
 
