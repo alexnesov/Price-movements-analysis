@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
 
-
 class Portfolio:
     """
     The Porfolio aims to be made of approx. 10 stocks
     """
     positions = {}
+
     totalPL = 0
     totalPositions = 0
 
@@ -22,31 +22,7 @@ class Portfolio:
                 'amount':f'{Iamount}',
                 'initialPrice':f'{IinitialPrice}'}
                 }
-
             )
-
-
-    def calculatePosPL(self,initialPrice,priceNow):
-        
-        pl = int(priceNow) - int(initialPrice)
-        print("pl: ", pl)
-        return pl
-
-        
-    def addPrice(self,positionID,priceNow):
-        """
-        1. We add the current price market to the position
-        2. It then calculates automatically the PL and adds it to 
-        the corresponding position column
-        """
-        self.positions[f'{positionID}']['priceNow'] = f'{priceNow}'
-
-        pl = self.calculatePosPL(
-                self.positions[f'{positionID}']['initialPrice'],
-                self.positions[f'{positionID}']['priceNow'])
-
-        self.positions[f'{positionID}']['PL'] = f'{pl}'
-
 
     @property
     def portfolioAsDF(self):
@@ -58,6 +34,37 @@ class Portfolio:
         df = pd.DataFrame.from_dict(self.positions)
         return df
 
+    def calculatePosPL(self,initialPrice,priceNow):
+        pl = int(priceNow) - int(initialPrice)
+        return pl
+
+
+    def calculateTotalPL(self):
+        df = pd.DataFrame.from_dict(self.positions)
+        rowPL = df.loc['PL']
+        rowPLfloats = pd.to_numeric(rowPL, errors='coerce')
+        self.totalPL = sum(rowPLfloats)
+        print('Total PL: ', self.totalPL)
+
+    def addPrice(self,positionID,priceNow):
+        """
+        1. We add the current price market to the position
+        2. Calcultes automatically the PL for POSITION and adds it to 
+        the corresponding position column
+        3. Updates TOTAL PL
+
+        """
+        self.positions[f'{positionID}']['priceNow'] = f'{priceNow}'
+
+        pl = self.calculatePosPL(
+                self.positions[f'{positionID}']['initialPrice'],
+                self.positions[f'{positionID}']['priceNow'])
+
+        self.positions[f'{positionID}']['PL'] = f'{pl}'
+        
+        self.calculateTotalPL()
+
+
 
 ##### Testing the code #####
 P1.positions['Pos001']
@@ -67,9 +74,8 @@ P1 = Portfolio("P1")
 P1.addPosition("Pos001",'AAPL',1000,80)
 P1.addPosition("Pos002",'PLUG',1000,63)
 
-
 P1.addPrice("Pos001",60)
+P1.addPrice("Pos002",100)
 
-P1.positions['Pos001']['ticker']
 P1.positions
 P1.portfolioAsDF
