@@ -13,7 +13,7 @@ split on 10 stock
 
 class Portfolio:
     """
-    
+
     """
     positions = {}
     totalPL = 0
@@ -34,11 +34,28 @@ class Portfolio:
 
             )
 
+
+    def calculatePosPL(self,initialPrice,priceNow):
+        
+        pl = int(priceNow) - int(initialPrice)
+        print("pl: ", pl)
+        return pl
+
+        
     def addPrice(self,positionID,priceNow):
         """
-        We add the current price market to the position
+        1. We add the current price market to the position
+        2. It then calculates automatically the PL and adds it to 
+        the corresponding position column
         """
         self.positions[f'{positionID}']['priceNow'] = f'{priceNow}'
+
+        pl = self.calculatePosPL(
+                self.positions[f'{positionID}']['initialPrice'],
+                self.positions[f'{positionID}']['priceNow'])
+
+        self.positions[f'{positionID}']['PL'] = f'{pl}'
+
 
     @property
     def portfolioAsDF(self):
@@ -47,11 +64,7 @@ class Portfolio:
 
 
 
-
-
-
-
-
+P1.positions['Pos001']
 
 
 P1 = Portfolio("P1")
