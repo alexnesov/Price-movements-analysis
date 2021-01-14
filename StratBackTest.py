@@ -4,12 +4,6 @@ import numpy as np
 stockA = [1,2,4,15,1,6]
 
 
-"""
-Scenario to come:
-
-100 000 euros
-split on 10 stock
-"""
 
 class Portfolio:
     """
