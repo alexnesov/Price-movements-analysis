@@ -16,11 +16,11 @@ class Portfolio:
     def addPosition(self, positionID, Iticker, Iamount, IinitialPrice):
         self.totalPositions = self.totalPositions + Iamount
         self.positions.update(
-            {f'{positionID}':
+                {f'{positionID}':
 
-                {'ticker':f'{Iticker}',
-                'amount':f'{Iamount}',
-                'initialPrice':f'{IinitialPrice}'}
+                    {'ticker':f'{Iticker}',
+                    'amount':f'{Iamount}',
+                    'initialPrice':f'{IinitialPrice}'}
                 }
             )
 
